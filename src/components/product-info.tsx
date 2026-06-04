@@ -8,6 +8,7 @@ import { ColorSwatches } from "@/components/color-swatches";
 import { SizeSelector } from "@/components/size-selector";
 import { useCart } from "@/components/cart-provider";
 import { WishlistButton } from "@/components/wishlist-button";
+import { ViewingCount } from "@/components/viewing-count";
 import { getSellerById } from "@/data/sellers";
 
 interface ProductInfoProps {
@@ -148,6 +149,9 @@ export function ProductInfo({ product }: ProductInfoProps) {
           </>
         )}
       </div>
+
+      {/* Social proof — live "people viewing" count */}
+      <ViewingCount productId={product.id} live variant="detail" />
 
       {/* Color swatches */}
       <ColorSwatches

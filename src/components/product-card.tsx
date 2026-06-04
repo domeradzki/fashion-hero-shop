@@ -6,7 +6,9 @@ import { cn } from "@/lib/utils";
 import type { Product } from "@/types";
 import { WishlistButton } from "./wishlist-button";
 import { useQuickView } from "./quick-view-provider";
+import { ViewingCount } from "./viewing-count";
 import { getSellerById } from "@/data/sellers";
+import { shouldShowOnListing } from "@/lib/viewing-count";
 
 interface ProductCardProps {
   product: Product;
@@ -148,6 +150,11 @@ export function ProductCard({ product, className }: ProductCardProps) {
           </span>
         )}
       </div>
+
+      {/* Social proof — only the busier products, static on listings */}
+      {shouldShowOnListing(product.id) && (
+        <ViewingCount productId={product.id} variant="card" className="mt-1.5" />
+      )}
     </div>
   );
 }
