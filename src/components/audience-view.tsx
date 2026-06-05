@@ -46,12 +46,12 @@ export function AudienceView({ seller }: AudienceViewProps) {
 
         <div className="rounded-md bg-card px-6 py-6">
           <p className="text-4xl font-semibold text-charcoal">{repeatBuyerPct}%</p>
-          <p className="text-label mt-1">Powracający kupujący: {repeatBuyerPct}%</p>
+          <p className="text-label mt-1">Powracający kupujący</p>
         </div>
 
         <div className="rounded-md bg-card px-6 py-6">
           <p className="text-4xl font-semibold text-charcoal">{repeatGmvPct}%</p>
-          <p className="text-label mt-1">Udział powtórnego GMV: {repeatGmvPct}%</p>
+          <p className="text-label mt-1">Udział powtórnego GMV</p>
           <p className="mt-2 text-sm text-warm-gray">
             Tyle Twojej sprzedaży pochodzi od stałych klientów.
           </p>
