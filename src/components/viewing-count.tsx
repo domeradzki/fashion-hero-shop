@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { EyeIcon } from "@/components/icons";
 import { useViewingCount } from "@/hooks/use-viewing-count";
+import { useFeatureFlag } from "@/hooks/use-feature-flag";
 import { VIEWING_COUNT_CONFIG } from "@/lib/viewing-count";
 
 interface ViewingCountProps {
@@ -21,8 +22,10 @@ export function ViewingCount({
   className,
 }: ViewingCountProps) {
   const count = useViewingCount(productId, { live });
+  // PostHog kill-switch on top of the local config gate. Default ON until the flag is created.
+  const flagEnabled = useFeatureFlag("viewing-count-badge", true);
 
-  if (!VIEWING_COUNT_CONFIG.enabled) return null;
+  if (!flagEnabled || !VIEWING_COUNT_CONFIG.enabled) return null;
 
   if (variant === "card") {
     return (

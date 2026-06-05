@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { track } from "@/lib/track";
+import { useFeatureVariant } from "@/hooks/use-feature-flag";
 
 interface FollowButtonProps {
   sellerId: string;
@@ -34,6 +35,11 @@ export function FollowButton({
     track({ type: "notify_optin", sellerId, timestamp: Date.now() });
   }
 
+  // A/B test (PostHog experiment "follow-cta-test"); goal metric = follow_click.
+  const ctaVariant = useFeatureVariant("follow-cta-test", "control");
+  const followLabel =
+    ctaVariant === "test" ? "Obserwuj — nie przegap dropów" : "Obserwuj butik";
+
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
       <button
@@ -45,7 +51,7 @@ export function FollowButton({
           followed && "opacity-80"
         )}
       >
-        {followed ? "Obserwujesz ✓" : "Obserwuj butik"}
+        {followed ? "Obserwujesz ✓" : followLabel}
       </button>
 
       <button
